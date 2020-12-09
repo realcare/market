@@ -8,6 +8,10 @@ const session = require('express-session');
 
 const connect = require('./modules');
 const app = express();
+const indexRouter = require('./routes');
+const authRouter = require('./routes/auth');
+const profileRouter = require('./routes/profile');
+const productRouter = require('./routes/product');
 dotenv.config();
 app.set('port', process.env.PORT || 8080);
 app.set('view engine', 'html');
@@ -34,6 +38,11 @@ app.use(
     name: 'session-cookie',
   })
 );
+
+app.use('/', indexRouter);
+app.use('/auth', authRouter);
+app.use('/profile', profileRouter);
+app.use('/product', productRouter);
 
 app.use((req, res, next) => {
   const error = new Error(`${req.method} ${req.url} 라우터가 없습니다`);
