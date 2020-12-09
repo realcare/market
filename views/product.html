@@ -1,0 +1,20 @@
+{% extends 'layout.html' %} {% block css %}
+<link rel="stylesheet" href="/products.css" />
+{% endblock %} {% block content %}
+<div class="container-product">
+  <button onclick="changeHref('/product/registration')">
+    새로운 제품 등록
+  </button>
+  <div class="container-product-box">
+    <div class="product-box-layout">
+      {% for product in products %}
+      <div class="product-info">
+        <img src="{{product.img[0].path}}" alt="product-info" />
+        <h1>{{product.name}}</h1>
+        <p>{{product.price}}</p>
+      </div>
+      {% endfor%}
+    </div>
+  </div>
+</div>
+{% endblock %}

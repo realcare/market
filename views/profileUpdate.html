@@ -1,0 +1,45 @@
+{% extends 'layout.html' %} {% block content %}
+<div>
+  <form action="/profile/update" method="post">
+    <input
+      type="email"
+      autocomplete
+      name="email"
+      placeholder="{{user.userName}}"
+      required
+    />
+    <input
+      type="password"
+      name="password"
+      placeholder="{{user.password}}"
+      autocomplete="current-password"
+      required
+    />
+    <input
+      type="text"
+      name="userName"
+      placeholder="{{user.userName}}"
+      required
+    />
+    <input
+      type="text"
+      name="nickName"
+      placeholder="{{user.nickName}}"
+      required
+    />
+    <input
+      type="tel"
+      name="phoneNum"
+      placeholder="{{user.phoneNum}}"
+      required
+    />
+    <input
+      type="text"
+      name="dateOfBirth"
+      placeholder="{{user.dateOfBirth}}"
+      required
+    />
+    <input type="submit" value="등록" />
+  </form>
+</div>
+{% endblock %}
