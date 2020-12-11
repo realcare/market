@@ -27,9 +27,8 @@ const userSchema = mongoose.Schema({
     required: true,
     unique: true,
   },
-  dateOfBirth: {
+  profileImg: {
     type: String,
-    required: true,
   },
   token: {
     type: String,
