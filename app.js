@@ -15,7 +15,7 @@ const authRouter = require('./routes/auth');
 const profileRouter = require('./routes/profile');
 const productRouter = require('./routes/product');
 const chattingRouter = require('./routes/chatting');
-const technicalRouter = require('./routes/technicalDescription');
+
 app.set('port', process.env.PORT || 80);
 app.set('view engine', 'html');
 nunjucks.configure('views', {
@@ -44,7 +44,6 @@ app.use('/auth', authRouter);
 app.use('/profile', profileRouter);
 app.use('/product', productRouter);
 app.use('/chatting', chattingRouter);
-app.use('/technicalDescription', technicalRouter);
 
 app.use((req, res, next) => {
   const error = new Error(`${req.method} ${req.url} 라우터가 없습니다`);
