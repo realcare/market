@@ -1,8 +1,6 @@
 {% extends 'layout.html' %} {% block css %}
-
-<link rel="stylesheet" href="/productRegistration.css" />
-{% endblock %} {% block content %}
-
+<link rel="stylesheet" href="/css/productRegistration.css" />
+{% endblock %} {% block content %} {% if product == null %}
 <div class="contaier-product-registration">
   <form
     id="product-registration-form"
@@ -14,8 +12,9 @@
     <input type="text" name="price" placeholder="상품 가격" pattern="[0-9]+" />
     <textarea
       name="description"
-      placeholder="설명을 입력해주세요"
+      placeholder="설명은 500자 까지 가능합니다"
       from="product-registration-form"
+      maxlength="500"
     ></textarea>
     <input type="file" name="productImg" />
     <input type="file" name="productImg" />
@@ -23,5 +22,40 @@
     <input type="submit" value="등록" />
   </form>
 </div>
-
-{% endblock %}
+{% else %}
+<div class="contaier-product-registration">
+  <form
+    id="product-registration-form"
+    action="/product/{{product.id}}/update"
+    enctype="multipart/form-data"
+    method="POST"
+  >
+    <label for="productName">상품 이름</label>
+    <input
+      type="text"
+      id="productName"
+      name="productName"
+      placeholder="{{product.name}}"
+    />
+    <label for="price">상품 가격</label>
+    <input
+      type="text"
+      id="price"
+      name="price"
+      placeholder="{{product.price}}"
+      pattern="[0-9]+"
+    />
+    <label for="description">상품 설명</label>
+    <textarea
+      name="description"
+      id="description"
+      placeholder="{{product.description}}"
+      maxlength="500"
+    ></textarea>
+    <input type="file" name="productImg" />
+    <input type="file" name="productImg" />
+    <input type="file" name="productImg" />
+    <input type="submit" value="등록" />
+  </form>
+</div>
+{% endif %} {% endblock %}

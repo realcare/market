@@ -1,0 +1,51 @@
+{% extends 'layout.html' %} {% block css %}
+<link rel="stylesheet" href="/css/productDetail.css" />
+{% endblock %} {% block content %}
+<div class="container-product-info">
+  <div class="container-product-info-layout">
+    <div class="container-product-info-box">
+      <div class="product-img">
+        <button class="imgbutton" onclick="plusSlides(-1)">&#10094;</button>
+        <div class="img-img">
+          {% for img in product.img %}
+          <div class="img-box">
+            <img src="{{img.path}}" id="imgs" alt="firstImg" />
+          </div>
+          {% endfor %}
+        </div>
+        <button class="imgbutton" onclick="plusSlides(1)">&#10095;</button>
+      </div>
+      <div class="product-info-box">
+        <div class="product-info">
+          <ul>
+            <li>상품 이름 : {{product.name}}</li>
+            <li>가격 : {{product.price}}원</li>
+            <li>판매자 : {{product.author.nickName}}</li>
+            <li id="description">설명 : {{product.description}}</li>
+          </ul>
+        </div>
+        {% if user.id == product.author.id %}
+        <div class="product-btn">
+          <button onclick="changeHref(`/product/{{product.id}}/update`)">
+            수정
+          </button>
+          <button onclick="changeHref('/product/{{product.id}}/delete')">
+            상품 삭제
+          </button>
+        </div>
+        {% else %}
+        <div class="product-btn">
+          <button
+            onclick="openWindowPop(`/product/{{product.id}}/room`, `{{product.name}}`)"
+          >
+            판매자와 연락하기
+          </button>
+        </div>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock%} {% block javascript %}
+<script src="/js/productImgSlider.js"></script>
+{% endblock %}

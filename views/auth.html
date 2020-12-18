@@ -2,26 +2,37 @@
 <div class="container-login">
   <div class="container" id="container">
     <div class="form-container sign-up-container">
-      <form id="register-form" action="/auth/register" method="POST">
+      <form
+        id="register-form"
+        action="/auth/register"
+        method="POST"
+        enctype="multipart/form-data"
+      >
         <h1>Create Account</h1>
         <input
           type="email"
           autocomplete
           name="email"
-          placeholder="이메일"
+          placeholder="이메일 ex) hiMarket@gmail.com"
           required
         />
         <input
           type="password"
           name="password"
-          placeholder="비밀번호"
+          placeholder="비밀번호 : 영어,숫자 6~12자리"
           autocomplete="current-password"
           required
         />
         <input type="text" name="userName" placeholder="성명" required />
         <input type="text" name="nickName" placeholder="닉네임" required />
-        <input type="tel" name="phoneNum" placeholder="핸드폰번호" required />
-        <input type="date" name="dateOfBirth" />
+        <input
+          type="tel"
+          name="phoneNum"
+          placeholder="핸드폰번호 : - 없이 입력해주세요"
+          required
+        />
+        <label for="profileImg">프로필 사진</label>
+        <input type="file" name="profileImg" id="profileImg" />
         <input type="submit" value="등록" />
       </form>
     </div>
@@ -65,5 +76,6 @@
     </div>
   </div>
 </div>
-<script src="./register.js"></script>
+{% endblock %} {% block javascript%}
+<script src="/js/signUpIn.js"></script>
 {% endblock%}

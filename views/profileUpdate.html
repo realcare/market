@@ -1,44 +1,58 @@
-{% extends 'layout.html' %} {% block content %}
-<div>
-  <form action="/profile/update" method="post">
-    <input
-      type="email"
-      autocomplete
-      name="email"
-      placeholder="{{user.userName}}"
-      required
-    />
-    <input
-      type="password"
-      name="password"
-      placeholder="{{user.password}}"
-      autocomplete="current-password"
-      required
-    />
-    <input
-      type="text"
-      name="userName"
-      placeholder="{{user.userName}}"
-      required
-    />
-    <input
-      type="text"
-      name="nickName"
-      placeholder="{{user.nickName}}"
-      required
-    />
-    <input
-      type="tel"
-      name="phoneNum"
-      placeholder="{{user.phoneNum}}"
-      required
-    />
-    <input
-      type="text"
-      name="dateOfBirth"
-      placeholder="{{user.dateOfBirth}}"
-      required
-    />
+{% extends 'layout.html' %} {% block css %}
+<link rel="stylesheet" href="/css/profileUpdate.css" />
+
+{% endblock %} {% block content %}
+<div class="container-profile-update">
+  <form
+    id="profile-update-form"
+    action="/profile/update"
+    method="POST"
+    enctype="multipart/form-data"
+  >
+    <div class="update-list">
+      <label for="email">이메일 : </label>
+      <input
+        id="email"
+        type="email"
+        autocomplete
+        name="email"
+        value="{{user.email}}"
+        readonly
+        required
+      />
+    </div>
+    <div class="update-list">
+      <label for="userName">성명 : </label>
+      <input
+        id="userName"
+        type="text"
+        name="userName"
+        placeholder="{{user.userName}}"
+        required
+      />
+    </div>
+    <div class="update-list">
+      <label for="nickName">닉네임 : </label>
+      <input
+        id="nickName"
+        type="text"
+        name="nickName"
+        placeholder="{{user.nickName}}"
+        required
+      />
+    </div>
+    <div class="update-list">
+      <label for="phoneNum">핸드폰 : </label>
+      <input
+        id="phoneNum"
+        type="tel"
+        name="phoneNum"
+        placeholder="{{user.phoneNum}}"
+        required
+      />
+    </div>
+    <label for="update-img">프로필 이미지</label>
+    <input type="file" name="profileImg" id="update-img" />
     <input type="submit" value="등록" />
   </form>
 </div>

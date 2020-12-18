@@ -3,18 +3,25 @@ const { User } = require('../modules/user');
 const isAuth = require('../middleware/isAuth');
 const middleMulter = require('../middleware/middleMulter');
 const { Product } = require('../modules/product');
+const isAlertProduct = require('../middleware/isAlertProduct');
 const router = express.Router();
 
-router.get('/', isAuth, async (req, res, next) => {
+router.get('/', isAuth, isAlertProduct, async (req, res, next) => {
   try {
-    if (req.user) {
-      res.render('profile', {
-        user: req.user,
-      });
+    const products = await Product.find({ author: req.user.id });
+
+    if (products.length !== 0) {
+      if (!req.alertProduct) {
+        return res.render('profile', { user: req.user, products });
+      } else {
+        return res.render('profile', {
+          user: req.user,
+          products,
+          alertProduct: req.alertProduct,
+        });
+      }
     } else {
-      return res.send(
-        '<script type="text/javascript">alert("로그인이 필요합니다."); window.location="/"; </script>'
-      );
+      return res.render('profile', { user: req.user });
     }
   } catch (error) {
     console.error(error);
@@ -61,7 +68,7 @@ router
           },
           { new: true }
         );
-        return res.render('profile', { user });
+        return res.redirect('/profile');
       } catch (error) {
         console.error(error);
         next(error);

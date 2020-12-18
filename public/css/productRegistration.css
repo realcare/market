@@ -1,0 +1,43 @@
+.contaier-product-registration {
+  width: 60%;
+  margin: 100px auto;
+  background-color: #ffffff;
+  border-radius: 15px;
+  box-shadow: 0px 5px 5px rgba(0, 0, 0, 0.5);
+}
+
+#product-registration-form {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  padding: 30px;
+}
+
+#product-registration-form input {
+  text-align: center;
+  margin: 5px 0px;
+  width: 250px;
+}
+#product-registration-form input[type='text'] {
+  border: none;
+  border-bottom: 2px solid tomato;
+}
+
+#product-registration-form textarea {
+  width: 600px;
+  height: 200px;
+  padding: 10px;
+  margin-top: 10px;
+}
+
+#product-registration-form input[type='submit'] {
+  border: none;
+  padding: 10px;
+  background-color: crimson;
+  border-radius: 15px;
+  box-shadow: 0px 5px 5px rgba(0, 0, 0, 0.5);
+  color: #ffffff;
+  font-weight: bold;
+  cursor: pointer;
+}

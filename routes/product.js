@@ -3,41 +3,14 @@ const router = express.Router();
 const isAuth = require('../middleware/isAuth');
 const middleMulter = require('../middleware/middleMulter');
 const { Product } = require('../modules/product');
-
-router.get('/', isAuth, async (req, res, next) => {
-  try {
-    await Product.find((err, products) => {
-      if (err) return next(err);
-      console.log('--------------------------');
-      products.forEach((v) => {
-        v.img[0];
-        console.log(v.img[0]);
-      });
-      if (!req.user) {
-        return res.render('main');
-      } else {
-        res.render('product', {
-          user: {
-            email: req.user.email,
-            nickName: req.user.nickName,
-            userName: req.user.userName,
-            phoneNum: req.user.phoneNum,
-          },
-          products,
-        });
-      }
-    });
-  } catch (error) {
-    console.error(error);
-    next(error);
-  }
-});
+const { User } = require('../modules/user');
+const { Room } = require('../modules/room');
+const isAlertProduct = require('../middleware/isAlertProduct');
 
 router
   .route('/registration')
   .get(isAuth, (req, res, next) => {
     try {
-      
       if (req.user) {
         res.render('productRegistration', {
           user: {
@@ -46,7 +19,6 @@ router
             userName: req.user.userName,
             phoneNum: req.user.phoneNum,
           },
-    
         });
       } else {
         return res.send(
@@ -87,10 +59,29 @@ router
     }
   );
 
-router.get('/:id', isAuth, async (req, res, next) => {
+router.get('/:id', isAuth, isAlertProduct, async (req, res, next) => {
   try {
-    const product = await Product.findById({ _id: req.params.id });
-    res.render('productDetail', { product, user: req.user });
+    const product = await Product.findById({ _id: req.params.id }).populate(
+      'author'
+    );
+
+    if (req.user._id !== product.author._id) {
+      product.views++;
+    }
+
+    product.save((err, productInfo) => {
+      if (err) next(err);
+    });
+
+    if (!req.alertProduct) {
+      return res.render('productDetail', { product, user: req.user });
+    } else {
+      return res.render('productDetail', {
+        product,
+        user: req.user,
+        alertProduct: req.alertProduct,
+      });
+    }
   } catch (error) {
     console.error(error);
     next(error);
@@ -117,8 +108,7 @@ router
           v.path = v.path.slice(6);
           return v;
         });
-        console.log('-------------');
-        console.log(req.params);
+
         const product = await Product.findByIdAndUpdate(
           req.params.id,
           {
@@ -145,6 +135,23 @@ router.get('/:id/delete', async (req, res, next) => {
     return res.send(
       ` <script type="text/javascript">alert("상품이 삭제되었습니다."); window.location="/"; </script>`
     );
+  } catch (error) {
+    console.error(error);
+    next(error);
+  }
+});
+
+router.get('/:id/room', isAuth, async (req, res, next) => {
+  const product = await Product.findById({ _id: req.params.id });
+
+  try {
+    const newRoom = await Room.create({
+      title: product.name,
+      productItem: product._id,
+      owner: req.user,
+    });
+
+    res.redirect(`/chatting/${newRoom._id}`);
   } catch (error) {
     console.error(error);
     next(error);

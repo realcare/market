@@ -7,13 +7,17 @@
       </div>
     </a>
 
-    <div id="searchBox">
-      <input type="text" name="search" placeholder="검색" />
-    </div>
     <nav>
       <div id="header-nav">
         {% if user %}
         <span><strong>{{user.nickName}}</strong>님 환영합니다</span>
+        {% if alertProduct %}
+        <i
+          class="fas fa-comment-dots"
+          onclick="openWindowPop(`/chatting/{{alertProduct.id}}`, `{{product.name}}`)"
+          id="alertProduct-btn"
+        ></i>
+        {% endif %}
         <i
           class="fas fa-edit"
           onclick="changeHref('/product/registration')"

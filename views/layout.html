@@ -3,8 +3,11 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
+    <link rel="icon" href="/favicon.ico" type="image/x-icon" />
     <title>중고마켓</title>
-    <link rel="stylesheet" href="/common.css" />
+    <link rel="stylesheet" href="/css/reset.css" />
+    <link rel="stylesheet" href="/css/common.css" />
     <link
       href="https://fonts.googleapis.com/css2?family=Gamja+Flower&display=swap"
       rel="stylesheet"
@@ -16,10 +19,18 @@
     {% block css %} {% endblock %}
   </head>
   <body>
-    {% include "header.html" %} {% block content %} {% endblock %} {% block
-    javascript%} {% endblock %}
-    <script src="/common.js"></script>
-
-    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    {% include "header.html" %} {% block content %} {% endblock %}
+    <!-- <div id="chat">
+      <input type="text" id="chatSend" />
+      <button onclick="send()">전송</button>
+    </div> -->
+    <!-- <script src="/socket.io/socket.io.js"></script>
+    <script>
+      const socket = io.connect('http://localhost:8080/chating', {
+        path: '/socket.io',
+      });
+    </script> -->
+    <script src="/js/common.js"></script>
+    {% block javascript%} {% endblock %}
   </body>
 </html>

@@ -17,6 +17,7 @@
   },
   "homepage": "https://github.com/realcare/market#readme",
   "dependencies": {
+    "axios": "^0.21.0",
     "bcrypt": "^5.0.0",
     "cookie-parser": "^1.4.5",
     "dotenv": "^8.2.0",
@@ -26,7 +27,9 @@
     "mongoose": "^5.11.5",
     "morgan": "^1.10.0",
     "multer": "^1.4.2",
-    "nunjucks": "^3.2.2"
+    "nunjucks": "^3.2.2",
+    "socket.io": "^3.0.4",
+    "url": "^0.11.0"
   },
   "devDependencies": {
     "nodemon": "^2.0.6"

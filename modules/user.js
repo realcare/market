@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 const bcrypt = require('bcrypt');
 const saltRounds = 10;
 const jwt = require('jsonwebtoken');
-// const passportLocalMongoose = require('passport-local-mongoose');
+
 const userSchema = mongoose.Schema({
   email: {
     type: String,
@@ -23,7 +23,7 @@ const userSchema = mongoose.Schema({
     unique: true,
   },
   phoneNum: {
-    type: Number,
+    type: String,
     required: true,
     unique: true,
   },
@@ -86,8 +86,6 @@ userSchema.statics.findByToken = function (token, cb) {
     });
   });
 };
-
-// userSchema.plugin(passportLocalMongoose, { usernameField: 'email' });
 
 const User = mongoose.model('User', userSchema);
 module.exports = { User };

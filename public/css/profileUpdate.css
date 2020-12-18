@@ -1,0 +1,48 @@
+.container-profile-update {
+  width: 40%;
+  margin: 100px auto;
+  background-color: #ffffff;
+  border-radius: 15px;
+  box-shadow: 0px 5px 5px rgba(0, 0, 0, 0.5);
+}
+
+#profile-update-form {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  padding: 30px;
+}
+
+.update-list {
+  margin: 15px 0px;
+}
+
+.update-list label {
+  margin-right: 10px;
+}
+
+#profile-update-form input[type='text'] {
+  border: none;
+  border-bottom: 2px solid steelblue;
+}
+#profile-update-form input[type='tel'] {
+  border: none;
+  border-bottom: 2px solid steelblue;
+}
+#profile-update-form input[type='file'] {
+  margin: 10px 0px;
+}
+
+#profile-update-form input[type='submit'] {
+  width: 100px;
+  border: none;
+  background-color: tomato;
+  padding: 10px;
+  border-radius: 15px;
+  box-shadow: 0px 5px 5px rgba(0, 0, 0, 0.5);
+  font-weight: bolder;
+  font-size: 20px;
+  color: white;
+  cursor: pointer;
+}

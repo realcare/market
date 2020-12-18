@@ -31,8 +31,10 @@ router.post(
     const img = req.file.path.slice('6');
     const emailPatten = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i;
     const pwPatten = /^[A-Za-z0-9]{6,12}$/;
-    const phoneNumPatteen = /(^02.{0}|^01.{1}|[0-9]{3})([0-9]+)([0-9]{4})/g;
-    if (emailPatten.test(req.body.email) == false) {
+    const phoneNumPatteen = /^01([0|1|6|7|8|9]?)([0-9]{3,4})([0-9]{4})$/;
+
+    //goni9071.tistory.com/365 [고니의꿈]
+    출처: https: if (emailPatten.test(req.body.email) == false) {
       return res.send(
         '<script type="text/javascript">alert("적합하지 않은 이메일 형식입니다.");window.location="/auth";</script>'
       );
@@ -44,9 +46,10 @@ router.post(
     }
     if (phoneNumPatteen.test(req.body.phoneNum) == false) {
       return res.send(
-        '<script type="text/javascript">alert("적합하지 않은 핸드폰 번호 형식입니다.");window.location="/auth";</script>'
+        '<script type="text/javascript">alert("ex) 01012341234");window.location="/auth";</script>'
       );
     }
+
     const user = await new User({
       email: req.body.email,
       password: req.body.password,
@@ -95,7 +98,7 @@ router.post('/login', async (req, res, next) => {
 
 router.get('/logout', isAuth, async (req, res, next) => {
   await User.findByIdAndUpdate(
-    { _id: req.user._id },
+    { _id: req.user.id },
     { token: '' },
     (err, user) => {
       if (err) return next(err);

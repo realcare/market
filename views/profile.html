@@ -1,12 +1,13 @@
 {% extends 'layout.html' %} {% block css %}
-<link rel="stylesheet" href="/profile.css" />
+<link rel="stylesheet" href="/css/profile.css" />
+<link rel="stylesheet" href="/css/main.css" />
 {% endblock %} {% block content %}
 
 <div class="container-user">
   <div class="container-user-box">
     <div class="container-user-box-layout">
       <div class="user-img">
-        <img src="/uploads/public1607497567295.jpg" alt="" />
+        <img src="{{user.profileImg}}" alt="profileImg" />
       </div>
       <div class="user-info-box">
         <div class="user-info">
@@ -15,7 +16,6 @@
             <li>성명 : {{user.userName}}</li>
             <li>닉네임 : {{user.nickName}}</li>
             <li>핸드폰 번호 : {{user.phoneNum}}</li>
-            <li>생년월일 : {{user.dateOfBirth}}</li>
           </ul>
         </div>
         <div class="user-btn">
@@ -27,4 +27,30 @@
   </div>
 </div>
 
+<div class="container-product">
+  <a href="" id="products-title"><h1>내가 등록한 상품</h1></a>
+  {% if products %}
+  <div class="container-product-layout">
+    <button class="prevBtn">&#10094;</button>
+    <div class="container-product-box">
+      <div class="product-box-layout" data-now-left="0">
+        {% for product in products %}
+        <div class="product-info">
+          <a href="/product/{{product.id}}">
+            <img src="{{product.img[0].path}}" alt="product-info" />
+            <h1>상품명 : {{product.name}}</h1>
+            <p>가격 : {{product.price}}원</p>
+          </a>
+        </div>
+        {% endfor %}
+      </div>
+    </div>
+    <button class="nextBtn">&#10095;</button>
+  </div>
+  {% else %}
+  <h1>등록된 상품이 없습니다!</h1>
+  {% endif %}
+</div>
+ {% endblock %} {% block javascript %}
+<script src="/js/productsSlider.js"></script>
 {% endblock %}

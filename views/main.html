@@ -1,1 +1,27 @@
-{% extends 'layout.html' %} {% block content %} {% endblock%}
+{% extends 'layout.html' %}{% block css %}
+<link rel="stylesheet" href="/css/main.css" />
+{% endblock %} {% block content %} {% for products in productsList %}
+<div class="container-product">
+  <a href="" id="products-title"><h1>{{products.name}}</h1></a>
+  <div class="container-product-layout">
+    <button class="prevBtn">&#10094;</button>
+    <div class="container-product-box">
+      <div class="product-box-layout" data-now-left="0">
+        {% for productItem in products.arr %}
+        <div class="product-info">
+          <a href="/product/{{productItem.id}}">
+            <img src="{{productItem.img[0].path}}" alt="product-info" />
+            <h1>상품명 : {{productItem.name}}</h1>
+            <p>가격 : {{productItem.price}}원</p>
+          </a>
+        </div>
+        {% endfor %}
+      </div>
+    </div>
+    <button class="nextBtn">&#10095;</button>
+  </div>
+</div>
+{% endfor %}  {% endblock%} {% block javascript %}
+<script src="/js/productsSlider.js"></script>
+
+{% endblock %}

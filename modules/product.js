@@ -19,8 +19,14 @@ const productSchma = mongoose.Schema({
   },
   author: {
     type: mongoose.Schema.Types.ObjectId,
+    ref: 'User',
     required: true,
   },
+  views: {
+    type: Number,
+    default: 0,
+  },
+
   createAt: {
     type: Date,
     default: Date.now,
