@@ -16,7 +16,7 @@ const profileRouter = require('./routes/profile');
 const productRouter = require('./routes/product');
 const chattingRouter = require('./routes/chatting');
 const technicalRouter = require('./routes/technicalDescription');
-app.set('port', process.env.PORT || 8080);
+app.set('port', process.env.PORT || 80);
 app.set('view engine', 'html');
 nunjucks.configure('views', {
   express: app,

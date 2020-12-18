@@ -36,7 +36,7 @@ module.exports = (server, app, sessionMiddleware) => {
 
       if (userCount === 0) {
         axios
-          .delete(`http://localhost:8080/chatting/${roomId}`)
+          .delete(`/chatting/${roomId}`)
           .then(() => {
             console.log('방 제거 요청 성공');
           })
