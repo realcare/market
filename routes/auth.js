@@ -33,8 +33,7 @@ router.post(
     const pwPatten = /^[A-Za-z0-9]{6,12}$/;
     const phoneNumPatteen = /^01([0|1|6|7|8|9]?)([0-9]{3,4})([0-9]{4})$/;
 
-    //goni9071.tistory.com/365 [고니의꿈]
-    출처: https: if (emailPatten.test(req.body.email) == false) {
+    if (emailPatten.test(req.body.email) == false) {
       return res.send(
         '<script type="text/javascript">alert("적합하지 않은 이메일 형식입니다.");window.location="/auth";</script>'
       );
