@@ -10,8 +10,11 @@ const latestPrevBtn = prevBtn[0];
 const latestNextBtn = nextBtn[0];
 const viewsPrevBtn = prevBtn[1];
 const viewsNextBtn = nextBtn[1];
-
-let content = latestProduct.querySelectorAll('.product-info');
+let content = '';
+if (latestProduct.querySelectorAll('.product-info')) {
+  content = latestProduct.querySelectorAll('.product-info');
+}
+// let content = latestProduct.querySelectorAll('.product-info');
 
 const size = infoBox[0].getBoundingClientRect().width + 13;
 
