@@ -11,7 +11,9 @@ const latestNextBtn = nextBtn[0];
 const viewsPrevBtn = prevBtn[1];
 const viewsNextBtn = nextBtn[1];
 let content = '';
-if (latestProduct.querySelectorAll('.product-info')) {
+if (!latestProduct.querySelectorAll('.product-info')) {
+  content = null;
+} else {
   content = latestProduct.querySelectorAll('.product-info');
 }
 // let content = latestProduct.querySelectorAll('.product-info');
