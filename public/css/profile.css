@@ -98,3 +98,8 @@
   height: 100%;
   object-fit: contain;
 }
+
+.container-product h1 {
+  font-size: 30px;
+  margin: 20px auto;
+}
