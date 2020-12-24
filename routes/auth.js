@@ -28,7 +28,13 @@ router.post(
         '<script type="text/javascript">alert("이미 가입된 회원입니다.");window.location="/auth";</script>'
       );
     }
-    const img = req.file.path.slice('6') || '/image/noimg.jpg';
+    let img;
+    if (!req.file.path) {
+      img = '/image/noimg.jpg';
+    } else {
+      img = req.file.path.slice('6');
+    }
+
     const emailPatten = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i;
     const pwPatten = /^[A-Za-z0-9]{6,12}$/;
     const phoneNumPatteen = /^01([0|1|6|7|8|9]?)([0-9]{3,4})([0-9]{4})$/;
