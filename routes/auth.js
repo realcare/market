@@ -29,7 +29,7 @@ router.post(
       );
     }
     let img;
-    if (!req.file.path) {
+    if (req.file.path == undefined) {
       img = '/image/noimg.jpg';
     } else {
       img = req.file.path.slice('6');
