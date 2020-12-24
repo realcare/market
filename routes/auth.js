@@ -22,54 +22,59 @@ router.post(
   '/register',
   middleMulter('profileImg').single('profileImg'),
   async (req, res, next) => {
-    const finduser = await User.findOne({ email: req.body.email });
-    if (finduser) {
-      return res.send(
-        '<script type="text/javascript">alert("이미 가입된 회원입니다.");window.location="/auth";</script>'
-      );
-    }
-    let img;
-    if (req.file.path == undefined) {
-      img = '/image/noimg.jpg';
-    } else {
-      img = req.file.path.slice('6');
-    }
+    try {
+      const finduser = await User.findOne({ email: req.body.email });
+      if (finduser) {
+        return res.send(
+          '<script type="text/javascript">alert("이미 가입된 회원입니다.");window.location="/auth";</script>'
+        );
+      }
+      let img;
+      if (req.file) {
+        img = req.file.path.slice('6');
+      } else {
+        img = '/image/noimg.jpg';
+      }
 
-    const emailPatten = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i;
-    const pwPatten = /^[A-Za-z0-9]{6,12}$/;
-    const phoneNumPatteen = /^01([0|1|6|7|8|9]?)([0-9]{3,4})([0-9]{4})$/;
+      const emailPatten = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i;
+      const pwPatten = /^[A-Za-z0-9]{6,12}$/;
+      const phoneNumPatteen = /^01([0|1|6|7|8|9]?)([0-9]{3,4})([0-9]{4})$/;
 
-    if (emailPatten.test(req.body.email) == false) {
-      return res.send(
-        '<script type="text/javascript">alert("적합하지 않은 이메일 형식입니다.");window.location="/auth";</script>'
-      );
-    }
-    if (pwPatten.test(req.body.password) == false) {
-      return res.send(
-        '<script type="text/javascript">alert("8~10자 영문, 숫자.");window.location="/auth";</script>'
-      );
-    }
-    if (phoneNumPatteen.test(req.body.phoneNum) == false) {
-      return res.send(
-        '<script type="text/javascript">alert("ex) 01012341234");window.location="/auth";</script>'
-      );
-    }
+      if (emailPatten.test(req.body.email) == false) {
+        return res.send(
+          '<script type="text/javascript">alert("적합하지 않은 이메일 형식입니다.");window.location="/auth";</script>'
+        );
+      }
+      if (pwPatten.test(req.body.password) == false) {
+        return res.send(
+          '<script type="text/javascript">alert("8~10자 영문, 숫자.");window.location="/auth";</script>'
+        );
+      }
+      if (phoneNumPatteen.test(req.body.phoneNum) == false) {
+        return res.send(
+          '<script type="text/javascript">alert("ex) 01012341234");window.location="/auth";</script>'
+        );
+      }
 
-    const user = await new User({
-      email: req.body.email,
-      password: req.body.password,
-      userName: req.body.userName,
-      nickName: req.body.nickName,
-      phoneNum: req.body.phoneNum,
-      profileImg: img,
-    });
+      const user = await new User({
+        email: req.body.email,
+        password: req.body.password,
+        userName: req.body.userName,
+        nickName: req.body.nickName,
+        phoneNum: req.body.phoneNum,
+        profileImg: img,
+      });
 
-    user.save((err, userInfo) => {
-      if (err) return next(err);
-      return res.send(
-        '<script type="text/javascript">alert("회원가입이 완료되었습니다."); window.location="/auth"; </script>'
-      );
-    });
+      user.save((err, userInfo) => {
+        if (err) return next(err);
+        return res.send(
+          '<script type="text/javascript">alert("회원가입이 완료되었습니다."); window.location="/auth"; </script>'
+        );
+      });
+    } catch (error) {
+      console.error(error);
+      next(error);
+    }
   }
 );
 
