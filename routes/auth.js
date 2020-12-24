@@ -64,7 +64,7 @@ router.post(
       profileImg: img,
     });
 
-    await user.save((err, userInfo) => {
+    user.save((err, userInfo) => {
       if (err) return next(err);
       return res.send(
         '<script type="text/javascript">alert("회원가입이 완료되었습니다."); window.location="/auth"; </script>'
